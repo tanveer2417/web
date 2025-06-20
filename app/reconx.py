@@ -7,6 +7,7 @@ import argparse
 import sys
 import os
 from modules import osint, subdomain, hosts, web
+from app.reconx import execute_scan
 
 def main():
     parser = argparse.ArgumentParser(
