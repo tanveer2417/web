@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Scan Results - ReconX - Automated Recon Tool{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="fas fa-chart-bar me-2"></i>
+        Scan Results
+    </h2>
+    <div>
+        <a href="{{ url_for('scan') }}" class="btn btn-success me-2">
+            <i class="fas fa-plus me-1"></i>New Scan
+        </a>
+        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i>Home
+        </a>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h5>
+                    <i class="fas fa-globe me-2"></i>
+                    {{ scan_result.domain }}
+                </h5>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <strong>Status:</strong>
+                        <span class="badge bg-success ms-1">
+                            <i class="fas fa-check me-1"></i>Completed
+                        </span>
+                    </div>
+                    <div class="col-sm-6">
+                        <strong>Started:</strong> {{ scan_result.created_at[:19] }}
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-6">
+                        <strong>Modules:</strong>
+                        {% for module in scan_result.modules %}
+                        <span class="badge bg-secondary me-1">{{ module }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="col-sm-6">
+                        <strong>Completed:</strong> {{ scan_result.completed_at[:19] }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h6 class="card-title">Scan Duration</h6>
+                <h4 class="text-primary">~1.0s</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if results %}
+
+{% for module, result in results.items() %}
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            {% if module == 'osint' %}
+            <i class="fas fa-eye me-2"></i>OSINT Results
+            {% elif module == 'subdomain' %}
+            <i class="fas fa-sitemap me-2"></i>Subdomain Enumeration
+            {% elif module == 'hosts' %}
+            <i class="fas fa-server me-2"></i>Live Hosts Detection
+            {% elif module == 'web' %}
+            <i class="fas fa-globe me-2"></i>Web Reconnaissance
+            {% endif %}
+        </h5>
+        <span class="badge {{ 'bg-success' if result.status == 'success' else 'bg-danger' }}">
+            {{ result.status|title }}
+        </span>
+    </div>
+    <div class="card-body">
+        {% if result.status == 'success' %}
+        <div class="output-container">
+            <pre class="bg-dark text-light p-3 rounded"><code>{{ result.output }}</code></pre>
+        </div>
+        {% else %}
+        <div class="alert alert-danger">
+            <h6 class="alert-heading">Error</h6>
+            <p class="mb-0">{{ result.error or 'Unknown error occurred' }}</p>
+            {% if result.output %}
+            <hr>
+            <pre class="mb-0"><code>{{ result.output }}</code></pre>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
+<div class="alert alert-warning">
+    <h6 class="alert-heading">
+        <i class="fas fa-info-circle me-2"></i>
+        No Results Available
+    </h6>
+    <p class="mb-0">
+        No scan results are available for this scan.
+    </p>
+</div>
+{% endif %}
+
+<div class="mt-4">
+    <div class="d-flex gap-2">
+        <a href="{{ url_for('scan') }}" class="btn btn-success">
+            <i class="fas fa-plus me-1"></i>New Scan
+        </a>
+        <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+            <i class="fas fa-home me-1"></i>Home
+        </a>
+    </div>
+</div>
+{% endblock %}

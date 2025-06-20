@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}ReconX - Automated Recon Tool{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center py-5">
+    <div class="container">
+        <h1 class="display-4 mb-4">
+            <i class="fas fa-search-location text-primary me-3"></i>
+            ReconX
+        </h1>
+        <p class="lead mb-4">
+            An automated reconnaissance tool for domain enumeration and OSINT gathering.
+            Discover subdomains, gather intelligence, and analyze web infrastructure.
+        </p>
+        
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('scan') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-radar me-2"></i>Start Scanning
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-eye fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">OSINT Module</h5>
+                    <p class="card-text">
+                        Gather open-source intelligence including WHOIS data, 
+                        certificate transparency logs, and Shodan information.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-sitemap fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Subdomain Enumeration</h5>
+                    <p class="card-text">
+                        Discover subdomains using certificate transparency, 
+                        DNS enumeration, and brute-force techniques.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-server fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Live Hosts Detection</h5>
+                    <p class="card-text">
+                        Identify active hosts through DNS resolution, 
+                        HTTP probing, and availability checks.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-globe fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Web Reconnaissance</h5>
+                    <p class="card-text">
+                        Analyze web technologies, extract forms and links, 
+                        and discover hidden directories.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Key Features
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Web-based interface
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    User authentication
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Rate limiting protection
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Input sanitization
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Scan history tracking
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Multiple scan modules
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Detailed results display
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Responsive design
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-warning mx-auto" style="max-width: 800px;">
+    <h6 class="alert-heading">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        Important Notice
+    </h6>
+    <p class="mb-0">
+        This tool is intended for authorized security testing and research purposes only. 
+        Always ensure you have proper permission before scanning any domain or network. 
+        Unauthorized scanning may violate terms of service or local laws.
+    </p>
+</div>
+{% endblock %}

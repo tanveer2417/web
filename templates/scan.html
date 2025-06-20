@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}New Scan - ReconX - Automated Recon Tool{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-radar me-2"></i>
+                    New Reconnaissance Scan
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-4">
+                        <label for="domain" class="form-label">
+                            <i class="fas fa-globe me-1"></i>
+                            Target Domain
+                        </label>
+                        <input type="text" class="form-control form-control-lg" id="domain" name="domain" 
+                               required placeholder="example.com" autocomplete="off">
+                        <div class="form-text">
+                            Enter the domain name without protocol (e.g., example.com, not https://example.com)
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="fas fa-cogs me-1"></i>
+                            Select Scan Modules
+                        </label>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" 
+                                                   id="osint" name="modules" value="osint">
+                                            <label class="form-check-label" for="osint">
+                                                <strong>OSINT Module</strong>
+                                            </label>
+                                        </div>
+                                        <small class="text-muted">
+                                            Performs WHOIS lookups, certificate transparency checks, 
+                                            and gathers open-source intelligence.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" 
+                                                   id="subdomain" name="modules" value="subdomain">
+                                            <label class="form-check-label" for="subdomain">
+                                                <strong>Subdomain Enumeration</strong>
+                                            </label>
+                                        </div>
+                                        <small class="text-muted">
+                                            Discovers subdomains using certificate transparency, 
+                                            DNS enumeration, and brute-force techniques.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" 
+                                                   id="hosts" name="modules" value="hosts">
+                                            <label class="form-check-label" for="hosts">
+                                                <strong>Live Hosts Detection</strong>
+                                            </label>
+                                        </div>
+                                        <small class="text-muted">
+                                            Checks DNS resolution and HTTP availability 
+                                            to identify active hosts.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" 
+                                                   id="web" name="modules" value="web">
+                                            <label class="form-check-label" for="web">
+                                                <strong>Web Reconnaissance</strong>
+                                            </label>
+                                        </div>
+                                        <small class="text-muted">
+                                            Analyzes web technologies, extracts forms and links, 
+                                            and discovers directories.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <h6 class="alert-heading">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Important Notice
+                        </h6>
+                        <p class="mb-0">
+                            Only scan domains you own or have explicit permission to test. 
+                            Unauthorized scanning may violate terms of service or laws.
+                        </p>
+                    </div>
+                    
+                    <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play me-2"></i>
+                            Start Scan
+                        </button>
+                        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            Back to Home
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="fas fa-clock me-2"></i>
+                        Estimated Scan Times
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3 mb-2">
+                            <strong>OSINT:</strong> 30-60 seconds
+                        </div>
+                        <div class="col-sm-6 col-lg-3 mb-2">
+                            <strong>Subdomains:</strong> 2-5 minutes
+                        </div>
+                        <div class="col-sm-6 col-lg-3 mb-2">
+                            <strong>Hosts:</strong> 1-3 minutes
+                        </div>
+                        <div class="col-sm-6 col-lg-3 mb-2">
+                            <strong>Web:</strong> 1-2 minutes
+                        </div>
+                    </div>
+                    <small class="text-muted">
+                        Actual times may vary based on target size and network conditions.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
