@@ -3,7 +3,7 @@ import subprocess
 from datetime import datetime
 from flask import render_template, request, redirect, url_for, flash, session
 from app import app
-from validators import validate_domain, sanitize_input
+from app.validators import validate_domain, sanitize_input
 import logging
 
 @app.route('/')
